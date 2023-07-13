@@ -1,0 +1,8 @@
+//
+// Created by yirao zhang on 2023-07-12.
+//
+
+#ifndef COMPOSITEILM_INFERENCE_H
+#define COMPOSITEILM_INFERENCE_H
+
+#endif //COMPOSITEILM_INFERENCE_H
