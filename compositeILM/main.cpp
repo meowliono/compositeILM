@@ -26,24 +26,24 @@ int main() {
 
     //
     //cout << "----------------------"<<endl;
+    double parameters[6] = {0,1,0,1,0,1};
+    set_prior_Gaussian(parameters);
+    MH(pop, samples);
+    rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
+    rec << "a0" <<","<<"a1"<<","<<"n1"<<endl;
+    for(int i = 0; i<20000; i++){
+        rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<endl;
+    }
     /*
     double parameters[6] = {0,1,0,1,0,1};
     set_prior_Gaussian(parameters);
-    RWMH(pop, samples);
-    rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
-    rec << "a0" <<","<<"a1"<<","<<"n1"<<endl;
-    for(int i = 0; i<10000; i++){
-        rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<endl;
-    }
-     */
-    double parameters[6] = {0,1,0,1,0,1};
-    set_prior_Gaussian(parameters);
     double samples_a0[10000];
-    RWMH_a0(pop, samples_a0);
+    MH_a0(pop, samples_a0);
     rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples_a0.csv",ios::out|ios::trunc);
     rec << "a0" <<endl;
     for(int i = 0; i<10000; i++){
         rec << samples_a0[i] <<endl;
     }
+     */
     rec.close();
 }

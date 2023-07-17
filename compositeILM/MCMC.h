@@ -9,5 +9,5 @@
 #include "ILM.h"
 #include "Inference.h"
 #include <random>
-void RWMH(Individual pop[], double samples[][3]);
-void RWMH_a0(Individual pop[], double samples_a0[]);
+void MH(Individual pop[], double samples[][3]);
+void MH_a0(Individual pop[], double samples_a0[]);

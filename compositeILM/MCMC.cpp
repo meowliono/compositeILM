@@ -3,19 +3,21 @@
 //
 #include "MCMC.h"
 using namespace std;
-void RWMH(Individual pop[], double samples[][3]){
+void MH(Individual pop[], double samples[][3]){
     /*
     samples[0][0] = 1e-10;
     samples[0][1] = 1e-10;
     samples[0][2] = 1e-10;
     */
-    samples[0][0] = 1;
-    for(int i=1; i<10000; i++){
+    samples[0][0] = 0.1;
+    samples[0][1] = 1;
+    samples[0][2] = 1;
+    for(int i=1; i<20000; i++){
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);
-        normal_distribution<double> dis0(samples[i-1][0],1);
-        normal_distribution<double> dis1(samples[i-1][1],1);
-        normal_distribution<double> dis2(samples[i-1][2],1);
+        normal_distribution<double> dis0(samples[i-1][0],0.7);
+        normal_distribution<double> dis1(samples[i-1][1],0.7);
+        normal_distribution<double> dis2(samples[i-1][2],0.7);
         double nxt_sample[3] = {dis0(gen), dis1(gen), dis2(gen)};
         while(nxt_sample[0]<0){
             nxt_sample[0] = dis0(gen);
@@ -45,11 +47,11 @@ void RWMH(Individual pop[], double samples[][3]){
             samples[i][0] = samples[i-1][0];
             samples[i][1] = samples[i-1][1];
             samples[i][2] = samples[i-1][2];
-            cout << "e " <<e<< "ratio " <<ratio<< " "<<samples[i][0] <<" "<<samples[i][1]<<" "<<samples[i][2]<<endl;
+            cout << "e " <<e<< "ratio " <<ratio<< " "<<nxt_sample[0] <<" "<<nxt_sample[1]<<" "<<nxt_sample[2]<<endl;
         }
     }
 }
-void RWMH_a0(Individual pop[], double samples_a0[]){
+void MH_a0(Individual pop[], double samples_a0[]){
     for(int i=1; i<10000; i++){
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);

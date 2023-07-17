@@ -12,7 +12,7 @@ int t_rem = 3;//infection period is 3 days
 int total_pop = 100;//100 people
 int inf_time_tab[100] = {0};//a table storing each individual's infection time
 int rem_time_tab[100] = {0};//a table storing each individual's removal time
-double samples[10000][3] = {0};
+double samples[20000][3] = {0};
 Individual::Individual(){
     cur_status = 0; //0: S; 1: I; 2:R
     next_status = 0;//cache previous day status
