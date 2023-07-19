@@ -21,7 +21,7 @@ private:
     double i;// individual's infectivity
     double inf_cov[2];//only two covariates: a0-intercept; a1-infectivity
 public:
-    double coef[3];//a0,a1,n1
+    double coef[4];//a0,a1,n1,beta
     int cur_status; //0: S; 1: I; 2:R store current day status
     int next_status;//store the calculated next day status
     int inf_time;// individual's infection time
@@ -41,7 +41,7 @@ public:
     void set_position(double x, double y);
     double get_sus(double a0, double a1);
     double get_inf(double n1);
-    double kernel(Individual& p);
+    double kernel(Individual& p, double beta);
     double spark();
 };
 double prob_sus(Individual population[], int id);

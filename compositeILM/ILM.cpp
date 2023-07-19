@@ -7,7 +7,7 @@ using namespace std;
  * double a1 = 0.5;
  * double n1 = 0.5;
  */
-float beta = 0.8;//power law coefficient
+float beta = 2;//power law coefficient
 int t_rem = 3;//infection period is 3 days
 int total_pop = 100;//100 people
 int inf_time_tab[100] = {0};//a table storing each individual's infection time
@@ -18,9 +18,10 @@ Individual::Individual(){
     next_status = 0;//cache previous day status
     inf_time = -1;// individual's infect time
     rem_time = -1;// individual's removal time
-    coef[0] = 0.5;
-    coef[1] = 0.5;
-    coef[2] = 0.5;
+    coef[0] = 1;//a0
+    coef[1] = 1;//a1
+    coef[2] = 1;//n1
+    coef[3] = 1.5;//beta
 }
 void Individual::set_sus_cov(const double& susceptibility){//susceptibility: from low to high, between 0-1
     sus_cov[0] = coef[0];
@@ -42,7 +43,7 @@ double Individual::get_inf(double n1){//a public interface to get individual's i
     i = inf_cov[0]+n1*inf_cov[1];
     return i;
 }
-double Individual::kernel(Individual& p){//kernel function: power-law of distance
+double Individual::kernel(Individual& p, double beta){//kernel function: power-law of distance
     double d = sqrt(pow((position_x - p.position_x),2) + pow((position_y - p.position_y),2));
     //distance between two individuals
     double k = pow(d,-beta);
@@ -61,10 +62,10 @@ double prob_sus(Individual population[], int id){//id - the # of the individual
             continue;
         }
         else if (i<id && population[i].cur_status == 1){
-            sum_t_k += population[i].get_inf(population[i].coef[2])*population[id].kernel(population[i]);
+            sum_t_k += population[i].get_inf(population[i].coef[2])*population[id].kernel(population[i], population[id].coef[3]);
         }
         else if(i>id && population[i].next_status == 1){
-            sum_t_k += population[i].get_inf(population[i].coef[2])*population[id].kernel(population[i]);
+            sum_t_k += population[i].get_inf(population[i].coef[2])*population[id].kernel(population[i], population[id].coef[3]);
         }
     }
     prob = 1-exp(-(s_i*sum_t_k+population[id].spark()));

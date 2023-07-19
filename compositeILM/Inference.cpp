@@ -19,7 +19,7 @@ void set_prior_Gaussian(double param[]){//mean and sd
 /*
  * calculate the log likelihood
  */
-double calculate_log_likelihood(Individual pop[], double a0, double a1, double n1){
+double calculate_log_likelihood(Individual pop[], double a0, double a1, double beta){
     double log_lhd = 0;
     for(int t=1; t<31; t++){//time day1-30
         for(int id=0; id<total_pop; id++){
@@ -35,7 +35,7 @@ double calculate_log_likelihood(Individual pop[], double a0, double a1, double n
                     continue;
                 }
                 if(pop[i].inf_time<=(t-1) && (t-1)<pop[i].rem_time){
-                    sum_t_k += pop[i].get_inf(n1)*pop[id].kernel(pop[i]);
+                    sum_t_k += pop[i].get_inf(1)*pop[id].kernel(pop[i], beta);
                 }
             }
             prob = 1-exp(-(s_i*sum_t_k+pop[id].spark()));
@@ -52,12 +52,12 @@ double calculate_log_likelihood(Individual pop[], double a0, double a1, double n
     }
     return log_lhd;
 }
-double post_dist_dens(Individual pop[],double a0, double a1, double n1){
+double post_dist_dens(Individual pop[],double a0, double a1, double beta){
     double log_lhd =0;
     log_lhd+= log((1.0/(sqrt(2*M_PI)*prior_param[1]))*exp(-pow(((a0-prior_param[0])/prior_param[1]),2)/2));
     log_lhd+= log((1.0/(sqrt(2*M_PI)*prior_param[3]))*exp(-pow(((a1-prior_param[2])/prior_param[3]),2)/2));
-    log_lhd+= log((1.0/(sqrt(2*M_PI)*prior_param[5]))*exp(-pow(((n1-prior_param[4])/prior_param[5]),2)/2));
-    log_lhd+= calculate_log_likelihood(pop, a0, a1, n1);
+    log_lhd+= log((1.0/(sqrt(2*M_PI)*prior_param[5]))*exp(-pow(((beta-prior_param[4])/prior_param[5]),2)/2));
+    log_lhd+= calculate_log_likelihood(pop, a0, a1, beta);
     return exp(log_lhd);
 }
 /*

@@ -10,5 +10,5 @@
 extern double prior_param[];
 extern double log_lhd;
 void set_prior_Gaussian(double param[6]);
-double calculate_log_likelihood(Individual pop[], double a0, double a1, double n1);
-double post_dist_dens(Individual pop[],double a0, double a1, double n1);
+double calculate_log_likelihood(Individual pop[], double a0, double a1, double beta);
+double post_dist_dens(Individual pop[],double a0, double a1, double beta);

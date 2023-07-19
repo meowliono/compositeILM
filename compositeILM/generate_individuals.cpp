@@ -12,7 +12,8 @@ void generate(Individual pop[]){//the total number of individuals
         rem_time_tab[i] = -1;
         pop[i].set_position(rand()%101+((double)(rand()%101)/100), rand()%101+((double)(rand()%101)/100));
         pop[i].set_sus_cov((double)(rand()%101)/100);
-        pop[i].set_inf_cov((double)(rand()%101)/100);
+        //pop[i].set_inf_cov((double)(rand()%101)/100);
+        pop[i].set_inf_cov(1);
     }
 }
 void assign_int_inf(Individual pop[], int id){//identify the 'patient 0'

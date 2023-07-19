@@ -30,7 +30,7 @@ int main() {
     set_prior_Gaussian(parameters);
     MH(pop, samples);
     rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
-    rec << "a0" <<","<<"a1"<<","<<"n1"<<endl;
+    rec << "a0" <<","<<"a1"<<","<<"beta"<<endl;
     for(int i = 0; i<20000; i++){
         rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<endl;
     }

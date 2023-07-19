@@ -10,14 +10,14 @@ void MH(Individual pop[], double samples[][3]){
     samples[0][2] = 1e-10;
     */
     samples[0][0] = 0.1;
-    samples[0][1] = 1;
-    samples[0][2] = 1;
+    samples[0][1] = 0.1;
+    samples[0][2] = 0.1;
     for(int i=1; i<20000; i++){
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);
-        normal_distribution<double> dis0(samples[i-1][0],0.7);
-        normal_distribution<double> dis1(samples[i-1][1],0.7);
-        normal_distribution<double> dis2(samples[i-1][2],0.7);
+        normal_distribution<double> dis0(samples[i-1][0],0.5);
+        normal_distribution<double> dis1(samples[i-1][1],0.5);
+        normal_distribution<double> dis2(samples[i-1][2],0.5);
         double nxt_sample[3] = {dis0(gen), dis1(gen), dis2(gen)};
         while(nxt_sample[0]<0){
             nxt_sample[0] = dis0(gen);
