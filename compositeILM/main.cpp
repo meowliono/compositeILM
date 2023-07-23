@@ -7,6 +7,7 @@ using namespace std;
 #include "MCMC.h"
 #include <string>
 #include <fstream>
+#include <armadillo>
 int main() {
     //Initialize population
     Individual pop[total_pop];
@@ -31,7 +32,7 @@ int main() {
     MH(pop, samples);
     rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
     rec << "a0" <<","<<"a1"<<","<<"beta"<<endl;
-    for(int i = 0; i<20000; i++){
+    for(int i = 0; i<50000; i++){
         rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<endl;
     }
     /*

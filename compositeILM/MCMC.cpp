@@ -2,7 +2,9 @@
 // Created by yirao zhang on 2023-06-25.
 //
 #include "MCMC.h"
+#include <armadillo>
 using namespace std;
+using namespace arma;
 void MH(Individual pop[], double samples[][3]){
     /*
     samples[0][0] = 1e-10;
@@ -12,7 +14,39 @@ void MH(Individual pop[], double samples[][3]){
     samples[0][0] = 0.1;
     samples[0][1] = 0.1;
     samples[0][2] = 0.1;
-    for(int i=1; i<20000; i++){
+    mat cov = { {2, -0.1, 0.1},
+              {-0.1, 2, 0.1},
+                {0.1,0.1,2}};
+    for(int i=1; i<50000; i++){
+        /*
+         * block-wise update
+         * generating log(a0), log(a1), log(beta)
+        vec cur_sample_log = {log(samples[i-1][0]), log(samples[i-1][1]), log(samples[i-1][2])};
+        vec nxt_sample_log = mvnrnd(cur_sample_log, cov);
+        double e = (double)(rand()%100001)/100000;
+        double ratio = post_dist_dens(pop, exp(nxt_sample_log(0)), exp(nxt_sample_log(1)), exp(nxt_sample_log(2)))/post_dist_dens(pop, samples[i-1][0], samples[i-1][1],samples[i-1][2]);
+        cout << "next prob " <<post_dist_dens(pop, exp(nxt_sample_log(0)), exp(nxt_sample_log(1)), exp(nxt_sample_log(2)))<< " current prob " <<post_dist_dens(pop, samples[i-1][0], samples[i-1][1],samples[i-1][2])<< endl;
+        if(ratio>=1 && e<1){
+            samples[i][0] = exp(nxt_sample_log(0));
+            samples[i][1] = exp(nxt_sample_log(1));
+            samples[i][2] = exp(nxt_sample_log(2));
+            cout << "e " <<e<< "ratio " <<ratio<< " "<<exp(nxt_sample_log(0)) <<" "<<exp(nxt_sample_log(1))<<" "<<exp(nxt_sample_log(2))<<endl;
+        }
+        else if(ratio<1 && e<ratio){
+            samples[i][0] = exp(nxt_sample_log(0));
+            samples[i][1] = exp(nxt_sample_log(1));
+            samples[i][2] = exp(nxt_sample_log(2));
+            cout << "e " <<e<< "ratio " <<ratio<< " "<<exp(nxt_sample_log(0)) <<" "<<exp(nxt_sample_log(1))<<" "<<exp(nxt_sample_log(2))<<endl;
+        }
+        else{
+            samples[i][0] = samples[i-1][0];
+            samples[i][1] = samples[i-1][1];
+            samples[i][2] = samples[i-1][2];
+            cout << "e " <<e<< "ratio " <<ratio<< " "<<exp(nxt_sample_log(0)) <<" "<<exp(nxt_sample_log(1))<<" "<<exp(nxt_sample_log(2))<<endl;
+        }
+        */
+        /* independently update a0, a1, beta
+        */
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);
         normal_distribution<double> dis0(samples[i-1][0],0.5);
@@ -48,6 +82,7 @@ void MH(Individual pop[], double samples[][3]){
             samples[i][1] = samples[i-1][1];
             samples[i][2] = samples[i-1][2];
             cout << "e " <<e<< "ratio " <<ratio<< " "<<nxt_sample[0] <<" "<<nxt_sample[1]<<" "<<nxt_sample[2]<<endl;
+
         }
     }
 }

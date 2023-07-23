@@ -12,16 +12,16 @@ int t_rem = 3;//infection period is 3 days
 int total_pop = 100;//100 people
 int inf_time_tab[100] = {0};//a table storing each individual's infection time
 int rem_time_tab[100] = {0};//a table storing each individual's removal time
-double samples[20000][3] = {0};
+double samples[50000][3] = {0};
 Individual::Individual(){
     cur_status = 0; //0: S; 1: I; 2:R
     next_status = 0;//cache previous day status
     inf_time = -1;// individual's infect time
     rem_time = -1;// individual's removal time
-    coef[0] = 1;//a0
-    coef[1] = 1;//a1
+    coef[0] = 2;//a0
+    coef[1] = 2;//a1
     coef[2] = 1;//n1
-    coef[3] = 1.5;//beta
+    coef[3] = 2;//beta
 }
 void Individual::set_sus_cov(const double& susceptibility){//susceptibility: from low to high, between 0-1
     sus_cov[0] = coef[0];
@@ -44,7 +44,7 @@ double Individual::get_inf(double n1){//a public interface to get individual's i
     return i;
 }
 double Individual::kernel(Individual& p, double beta){//kernel function: power-law of distance
-    double d = sqrt(pow((position_x - p.position_x),2) + pow((position_y - p.position_y),2));
+    double d = sqrt(pow((position_x - p.position_x),2) + pow((position_y - p.position_y), 2));
     //distance between two individuals
     double k = pow(d,-beta);
     return k;
