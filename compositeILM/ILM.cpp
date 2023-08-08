@@ -7,9 +7,9 @@ using namespace std;
  * double a1 = 0.5;
  * double n1 = 0.5;
  */
-float beta = 2;//power law coefficient
 int t_rem = 3;//infection period is 3 days
 int total_pop = 100;//100 people
+int K = 6; //number of clusters
 int inf_time_tab[100] = {0};//a table storing each individual's infection time
 int rem_time_tab[100] = {0};//a table storing each individual's removal time
 double samples[50000][3] = {0};
@@ -21,7 +21,9 @@ Individual::Individual(){
     coef[0] = 2;//a0
     coef[1] = 2;//a1
     coef[2] = 1;//n1
-    coef[3] = 2;//beta
+    coef[3] = 1.5;//beta
+    coef[4] = 0;//allow between-clusters communication
+    cluster_id = 0;
 }
 void Individual::set_sus_cov(const double& susceptibility){//susceptibility: from low to high, between 0-1
     sus_cov[0] = coef[0];
@@ -49,8 +51,8 @@ double Individual::kernel(Individual& p, double beta){//kernel function: power-l
     double k = pow(d,-beta);
     return k;
 }
-double Individual::spark(){
-    double spark = 0;//default spark = 0;
+double Individual::spark(double eps){
+    double spark = eps;//default spark = 0;
     return spark;
 }
 double prob_sus(Individual population[], int id){//id - the # of the individual
@@ -68,7 +70,7 @@ double prob_sus(Individual population[], int id){//id - the # of the individual
             sum_t_k += population[i].get_inf(population[i].coef[2])*population[id].kernel(population[i], population[id].coef[3]);
         }
     }
-    prob = 1-exp(-(s_i*sum_t_k+population[id].spark()));
+    prob = 1-exp(-(s_i*sum_t_k+population[id].spark(population[id].coef[4])));
     return prob;
 }
 void status_change(Individual population[], int id){

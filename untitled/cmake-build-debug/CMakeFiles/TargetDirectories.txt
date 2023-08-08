@@ -1,0 +1,7 @@
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/intrinsics_gen.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/omp_gen.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/acc_gen.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/RISCVTargetParserTableGen.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/yiraozhang/CLionProjects/untitled/cmake-build-debug/CMakeFiles/rebuild_cache.dir

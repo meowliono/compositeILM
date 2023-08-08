@@ -7,10 +7,13 @@ using namespace std;
 #include "MCMC.h"
 #include <string>
 #include <fstream>
-#include <armadillo>
+#include "Clustering.h"
+#include <sstream>
 int main() {
     //Initialize population
     Individual pop[total_pop];
+    map<int, vector<Individual>>clusters;//clusters
+    /*
     generate(pop);
     assign_int_inf(pop,5);
     //Simulate
@@ -20,31 +23,46 @@ int main() {
     rec.open("/Users/yiraozhang/CLionProjects/compositeILM/records.csv",ios::out|ios::trunc);
     rec << "id" <<","<<"time_of_infected"<<","<<"time_of_removed"<<","<<"position_x"<<","<<"position_y"<<","<<"susceptibility level"<<","<<"infectivity level"<<endl;
     for(int i = 0; i<total_pop; i++){
-        rec << i <<","<<inf_time_tab[i]<<","<<rem_time_tab[i]<<","<<pop[i].position_x<<","<<pop[i].position_y<<","<<pop[i].get_sus(pop[i].coef[0], pop[i].coef[1])<<","<<pop[i].get_inf(pop[i].coef[2])<<endl;
+        rec << i <<","<<inf_time_tab[i]<<","<<rem_time_tab[i]<<","<<pop[i].position_x<<","<<pop[i].position_y<<","<<pop[i].get_sus(0,1)<<","<<pop[i].get_inf(1)<<endl;
     }
     rec.close();
+    */
     //Import csv file(epidemic data)
-
-    //
-    //cout << "----------------------"<<endl;
-    double parameters[6] = {0,1,0,1,0,1};
-    set_prior_Gaussian(parameters);
+    fstream epidata;
+    string line;
+    epidata.open("/Users/yiraozhang/CLionProjects/compositeILM/records.csv", ios::in);
+    getline(epidata, line);//skip the header line
+    for(int i=0; i<total_pop; i++){
+        getline(epidata, line);
+        stringstream ss(line);
+        string element;
+        getline(ss, element, ',');//get id
+        getline(ss, element, ',');//get infection time
+        pop[i].inf_time = stoi(element);
+        getline(ss, element, ',');//get remove time
+        pop[i].rem_time = stoi(element);
+        getline(ss, element, ',');//get position_x
+        pop[i].position_x = stod(element);
+        getline(ss, element, ',');//get position_y
+        pop[i].position_y = stod(element);
+        getline(ss, element, ',');//get susceptibility level(between 0-1)
+        pop[i].set_sus_cov(stod(element));
+        getline(ss, element, ',');//get infectivity level(1 by default)
+        pop[i].set_inf_cov(stod(element));
+        getline(ss, element, ',');
+        pop[i].cluster_id = stoi(element);
+    }
+    /*Assign clusters
+    clusters = PerformClustering(pop, total_pop, K);
+    */
+    ofstream rec;
+    double parameters[6] = {1,1,1,1,1,1};
+    set_prior_parameters(parameters);
     MH(pop, samples);
     rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
-    rec << "a0" <<","<<"a1"<<","<<"beta"<<endl;
+    rec << "a0" <<","<<"a1"<<","<<"beta"<<","<<endl;
     for(int i = 0; i<50000; i++){
-        rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<endl;
+        rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<","<<samples[i][3]<<endl;
     }
-    /*
-    double parameters[6] = {0,1,0,1,0,1};
-    set_prior_Gaussian(parameters);
-    double samples_a0[10000];
-    MH_a0(pop, samples_a0);
-    rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples_a0.csv",ios::out|ios::trunc);
-    rec << "a0" <<endl;
-    for(int i = 0; i<10000; i++){
-        rec << samples_a0[i] <<endl;
-    }
-     */
     rec.close();
 }

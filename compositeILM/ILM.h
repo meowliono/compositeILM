@@ -7,10 +7,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-extern float beta;//power law coefficient
 extern int t_rem;//infection period is 3 days
 extern int current_time;//current time
 extern int total_pop;//total population
+extern int K;
 extern int inf_time_tab[];//a table store individuals' infection time
 extern int rem_time_tab[];//a table store individuals' removal time
 extern double samples[][3];
@@ -21,13 +21,14 @@ private:
     double i;// individual's infectivity
     double inf_cov[2];//only two covariates: a0-intercept; a1-infectivity
 public:
-    double coef[4];//a0,a1,n1,beta
+    double coef[5];//a0,a1,n1,beta, epsilon
     int cur_status; //0: S; 1: I; 2:R store current day status
     int next_status;//store the calculated next day status
     int inf_time;// individual's infection time
     int rem_time;// individual's removal time
     double position_x;// individual's position x axis
     double position_y;// individual's position y axis
+    int cluster_id;//individual's cluster id
 public:
     /*
      set_sus_cov: set susceptibility covariates
@@ -42,7 +43,7 @@ public:
     double get_sus(double a0, double a1);
     double get_inf(double n1);
     double kernel(Individual& p, double beta);
-    double spark();
+    double spark(double eps);
 };
 double prob_sus(Individual population[], int id);
 void status_change(Individual population[], int id);

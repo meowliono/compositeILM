@@ -1,0 +1,10 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -Dsymengine_DIR:PATH=/usr/local/Cellar/symengine/0.10.1/share/cmake/symengine -G Ninja -S /Users/yiraozhang/CLionProjects/untitled -B /Users/yiraozhang/CLionProjects/untitled/cmake-build-debug
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    symengine_DIR
+
+
+-- Build files have been written to: /Users/yiraozhang/CLionProjects/untitled/cmake-build-debug
