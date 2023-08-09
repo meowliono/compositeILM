@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "compositeILM"
+			"path" : "untitled"
 		}
 	],
 	"backtrace" : 1,
@@ -26,13 +26,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 7,
+				"line" : 8,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 8,
+				"line" : 11,
 				"parent" : 0
 			},
 			{
@@ -74,16 +74,11 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1,
-				2,
-				5,
-				7,
-				9,
-				11
+				1
 			]
 		}
 	],
-	"id" : "compositeILM::@6890427a1f51a3e7e1df",
+	"id" : "untitled::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -98,14 +93,14 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/usr/local/lib/libarmadillo.dylib",
+				"fragment" : "/usr/local/lib/libcppad_lib.dylib",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "compositeILM",
-	"nameOnDisk" : "compositeILM",
+	"name" : "untitled",
+	"nameOnDisk" : "untitled",
 	"paths" : 
 	{
 		"build" : ".",
@@ -118,24 +113,14 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1,
-				2,
-				5,
-				7,
-				9,
-				11
+				1
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				3,
-				4,
-				6,
-				8,
-				10,
-				12
+				2
 			]
 		}
 	],
@@ -150,67 +135,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "ILM.cpp",
+			"path" : "Static.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "MCMC.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "ILM.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "MCMC.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "generate_individuals.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "generate_individuals.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "simulate.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "simulate.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "Inference.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Inference.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "Clustering.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Clustering.h",
+			"path" : "swap.h",
 			"sourceGroupIndex" : 1
 		}
 	],

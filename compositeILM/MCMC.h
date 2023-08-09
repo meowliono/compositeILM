@@ -13,5 +13,3 @@
 #include <boost/math/distributions/gamma.hpp>
 void MH(Individual pop[], double samples[][3]);
 void MH_log(Individual pop[], double samples[][3]);
-void MH_a0(Individual pop[], double samples_a0[]);
-void MH_composite(map<int, vector<Individual>>clusters, double samples[][4]);

@@ -8,11 +8,14 @@ using namespace std;
 #include <string>
 #include <fstream>
 #include "Clustering.h"
+#include "HamiltonianMC.h"
+#include "Inference_composite.h"
+#include "MCMC_composite.h"
 #include <sstream>
 int main() {
     //Initialize population
     Individual pop[total_pop];
-    map<int, vector<Individual>>clusters;//clusters
+    map<int, vector<Individual>> clusters;//clusters
     /*
     generate(pop);
     assign_int_inf(pop,5);
@@ -32,7 +35,7 @@ int main() {
     string line;
     epidata.open("/Users/yiraozhang/CLionProjects/compositeILM/records.csv", ios::in);
     getline(epidata, line);//skip the header line
-    for(int i=0; i<total_pop; i++){
+    for (int i = 0; i < total_pop; i++) {
         getline(epidata, line);
         stringstream ss(line);
         string element;
@@ -52,17 +55,15 @@ int main() {
         getline(ss, element, ',');
         pop[i].cluster_id = stoi(element);
     }
-    /*Assign clusters
-    clusters = PerformClustering(pop, total_pop, K);
-    */
-    ofstream rec;
-    double parameters[6] = {1,1,1,1,1,1};
-    set_prior_parameters(parameters);
-    MH(pop, samples);
-    rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples.csv",ios::out|ios::trunc);
-    rec << "a0" <<","<<"a1"<<","<<"beta"<<","<<endl;
-    for(int i = 0; i<50000; i++){
-        rec << samples[i][0]<<","<<samples[i][1]<<","<<samples[i][2]<<","<<samples[i][3]<<endl;
-    }
-    rec.close();
+        clusters = PerformClustering(pop, total_pop, K);
+        ofstream rec;
+        double parameters[8] = {1, 1, 1, 1, 1, 1, 1, 1};
+        set_prior_parameters(parameters, 8);
+        MH_composite(clusters, samples);
+        rec.open("/Users/yiraozhang/CLionProjects/compositeILM/samples_composite.csv", ios::out | ios::trunc);
+        rec << "a0" << "," << "a1" << "," << "beta" << "," <<"eps"<<endl;
+        for (int i = 0; i < 50000; i++) {
+            rec << samples[i][0] << "," << samples[i][1] << "," << samples[i][2] <<"," << samples[i][3]<<endl;
+        }
+        rec.close();
 }
