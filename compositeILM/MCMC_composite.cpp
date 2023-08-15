@@ -10,10 +10,10 @@ void MH_composite(map<int, vector<Individual>>clusters, double samples[][4]){
     for(int i=1; i<50000; i++){
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);
-        normal_distribution<double> dis0(samples[i-1][0],0.6);
-        normal_distribution<double> dis1(samples[i-1][1],0.6);
-        normal_distribution<double> dis2(samples[i-1][2],0.6);
-        normal_distribution<double> dis3(samples[i-1][3],0.2);
+        normal_distribution<double> dis0(samples[i-1][0],0.2);
+        normal_distribution<double> dis1(samples[i-1][1],0.2);
+        normal_distribution<double> dis2(samples[i-1][2],1);
+        normal_distribution<double> dis3(samples[i-1][3],0.1);
         double nxt_sample[4] = {dis0(gen), dis1(gen), dis2(gen), dis3(gen)};
         while(nxt_sample[0]<0){
             nxt_sample[0] = dis0(gen);

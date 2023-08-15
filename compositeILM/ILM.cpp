@@ -12,16 +12,16 @@ int total_pop = 100;//100 people
 int K = 3; //number of clusters
 int inf_time_tab[100] = {0};//a table storing each individual's infection time
 int rem_time_tab[100] = {0};//a table storing each individual's removal time
-double samples[50000][4] = {0};
+double samples[50000][3] = {0};
 Individual::Individual(){
     cur_status = 0; //0: S; 1: I; 2:R
     next_status = 0;//cache previous day status
     inf_time = -1;// individual's infect time
     rem_time = -1;// individual's removal time
-    coef[0] = 2;//a0
-    coef[1] = 2;//a1
+    coef[0] = 0.3;//a0
+    coef[1] = 0.1;//a1
     coef[2] = 1;//n1
-    coef[3] = 1.5;//beta
+    coef[3] = 7;//beta
     coef[4] = 0;//allow between-clusters communication
     cluster_id = 0;
 }

@@ -55,6 +55,9 @@ void clustering_Kmeans(Individual pop[], int k){
         count++;
     }
 }
+//K-means algorithm in opencv
+
+//assign population to k centroids
 map<int, vector<Individual>>PerformClustering(Individual pop[], int total_pop, int K){
     map<int, vector<Individual>> clusters;
     for(int i = 0; i<total_pop; i++){
