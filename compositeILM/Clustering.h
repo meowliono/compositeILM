@@ -5,7 +5,12 @@
 #include <map>
 #include <vector>
 using namespace std;
-#endif //COMPOSITEILM_CLUSTERING_H
 void clustering_PAM(Individual pop[], int K);
 void clustering_Kmeans(Individual pop[], int K);
 map<int, vector<Individual>>PerformClustering(Individual pop[], int total_pop, int K);
+struct DataPoint {
+    double x;
+    double y;
+};
+vector<DataPoint> calculateClusterCenters(map<int, vector<Individual>>& clusters);
+#endif //COMPOSITEILM_CLUSTERING_H

@@ -65,3 +65,17 @@ map<int, vector<Individual>>PerformClustering(Individual pop[], int total_pop, i
     }
     return clusters;
 }
+vector<DataPoint> calculateClusterCenters(map<int, vector<Individual>>& clusters) {
+    vector<DataPoint> clusterCenters(K,{0,0});
+    for(int i=0; i<K; i++){
+        int num = 0;
+        for(Individual& person:clusters[i]){
+            clusterCenters[i].x+=person.position_x;
+            clusterCenters[i].y+=person.position_y;
+            num++;
+        }
+        clusterCenters[i].x = clusterCenters[i].x/num;
+        clusterCenters[i].y = clusterCenters[i].y/num;
+    }
+    return clusterCenters;
+}

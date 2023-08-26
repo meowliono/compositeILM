@@ -3,16 +3,16 @@
 //
 #include "MCMC.h"
 void MH(Individual pop[], double samples[][3]){
-    samples[0][0] = 0.1;
-    samples[0][1] = 0.1;
-    samples[0][2] = 0.1;
+    samples[0][0] = 0.001;
+    samples[0][1] = 0.001;
+    samples[0][2] = 0.001;
     for(int i=1; i<50000; i++){
         /* independently update a0, a1, beta
          */
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine gen(seed);
-        normal_distribution<double> dis0(samples[i-1][0],0.5);
-        normal_distribution<double> dis1(samples[i-1][1],0.5);
+        normal_distribution<double> dis0(samples[i-1][0],0.01);
+        normal_distribution<double> dis1(samples[i-1][1],0.01);
         normal_distribution<double> dis2(samples[i-1][2],0.5);
         double nxt_sample[3] = {dis0(gen), dis1(gen), dis2(gen)};
         while(nxt_sample[0]<0){
@@ -25,8 +25,8 @@ void MH(Individual pop[], double samples[][3]){
             nxt_sample[2] = dis2(gen);
         }
         double e = (double)(rand()%100001)/100000;
-        double prop_cur = (1-0.5 * erfc(-((0-samples[i-1][0])/0.5) * M_SQRT1_2))*(1-0.5 * erfc(-((0-samples[i-1][1])/0.5) * M_SQRT1_2))*(1-0.5 * erfc(-((0-samples[i-1][2])/0.5) * M_SQRT1_2));
-        double prop_nxt = (1-0.5 * erfc(-((0-nxt_sample[0])/0.5) * M_SQRT1_2))*(1-0.5 * erfc(-((0-nxt_sample[1])/0.5) * M_SQRT1_2))*(1-0.5 * erfc(-((0-nxt_sample[2])/0.5) * M_SQRT1_2));
+        double prop_cur = (1-0.5 * erfc(-((0-samples[i-1][0])/0.01) * M_SQRT1_2))*(1-0.5 * erfc(-((0-samples[i-1][1])/0.01) * M_SQRT1_2))*(1-0.5 * erfc(-((0-samples[i-1][2])/0.5) * M_SQRT1_2));
+        double prop_nxt = (1-0.5 * erfc(-((0-nxt_sample[0])/0.01) * M_SQRT1_2))*(1-0.5 * erfc(-((0-nxt_sample[1])/0.01) * M_SQRT1_2))*(1-0.5 * erfc(-((0-nxt_sample[2])/0.5) * M_SQRT1_2));
         double ratio = prop_cur*post_dist_dens(pop, nxt_sample[0], nxt_sample[1], nxt_sample[2])/(prop_nxt*post_dist_dens(pop, samples[i-1][0], samples[i-1][1],samples[i-1][2]));
         cout << "next prob " <<post_dist_dens(pop, nxt_sample[0], nxt_sample[1], nxt_sample[2])<< " current prob " <<post_dist_dens(pop, samples[i-1][0], samples[i-1][1],samples[i-1][2])<< endl;
         if(ratio>=1 || (ratio<1 && e<ratio)){

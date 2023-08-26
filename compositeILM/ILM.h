@@ -13,7 +13,7 @@ extern int total_pop;//total population
 extern int K;
 extern int inf_time_tab[];//a table store individuals' infection time
 extern int rem_time_tab[];//a table store individuals' removal time
-extern double samples[][3];
+extern double samples[][5];
 class Individual{//define individual class
 private:
     double s;// individual's susceptibility

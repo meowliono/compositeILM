@@ -23,8 +23,8 @@ void generate_clustered(Individual pop[], int K){//generate the clustered popula
     //armadillo library to generate bivariate Gaussian distribution
     for(int i=0; i<(K-1); i++){
         float x = static_cast<float>((i+1))/(K+1);
-        vec2 mean = {10*x,10*x};
-        mat22 cov = {{0.3, 0}, {0, 0.3}};
+        vec2 mean = {5*x,5*x};
+        mat22 cov = {{0.2, 0}, {0, 0.2}};
         arma_rng::set_seed_random();
         // Generate a random sample from the bivariate Gaussian distribution
         for(int j=0; j<(total_pop/K); j++){
@@ -39,8 +39,8 @@ void generate_clustered(Individual pop[], int K){//generate the clustered popula
         }
     }
     float x = static_cast<float>(K)/(K+1);
-    vec2 mean = {10*x,10*x};
-    mat22 cov = {{0.3, 0}, {0, 0.3}};
+    vec2 mean = {5*x,5*x};
+    mat22 cov = {{0.1, 0}, {0, 0.1}};
     arma_rng::set_seed_random();
     for(int j=(K-1)*(total_pop/K); j<total_pop; j++){
         vec2 sample = mvnrnd(mean, cov);
