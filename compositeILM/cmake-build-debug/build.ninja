@@ -116,6 +116,27 @@ build CMakeFiles/compositeILM.dir/MCMC_composite.cpp.o: CXX_COMPILER__compositeI
   OBJECT_DIR = CMakeFiles/compositeILM.dir
   OBJECT_FILE_DIR = CMakeFiles/compositeILM.dir
 
+build CMakeFiles/compositeILM.dir/posterior_predictive_checks.cpp.o: CXX_COMPILER__compositeILM_Debug /Users/yiraozhang/CLionProjects/compositeILM/posterior_predictive_checks.cpp || cmake_object_order_depends_target_compositeILM
+  DEP_FILE = CMakeFiles/compositeILM.dir/posterior_predictive_checks.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/compositeILM.dir
+  OBJECT_FILE_DIR = CMakeFiles/compositeILM.dir
+
+build CMakeFiles/compositeILM.dir/posterior_predictive_checks_composite.cpp.o: CXX_COMPILER__compositeILM_Debug /Users/yiraozhang/CLionProjects/compositeILM/posterior_predictive_checks_composite.cpp || cmake_object_order_depends_target_compositeILM
+  DEP_FILE = CMakeFiles/compositeILM.dir/posterior_predictive_checks_composite.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/compositeILM.dir
+  OBJECT_FILE_DIR = CMakeFiles/compositeILM.dir
+
+build CMakeFiles/compositeILM.dir/BBVI.cpp.o: CXX_COMPILER__compositeILM_Debug /Users/yiraozhang/CLionProjects/compositeILM/BBVI.cpp || cmake_object_order_depends_target_compositeILM
+  DEP_FILE = CMakeFiles/compositeILM.dir/BBVI.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/compositeILM.dir
+  OBJECT_FILE_DIR = CMakeFiles/compositeILM.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target compositeILM
@@ -124,7 +145,7 @@ build CMakeFiles/compositeILM.dir/MCMC_composite.cpp.o: CXX_COMPILER__compositeI
 #############################################
 # Link the executable compositeILM
 
-build compositeILM: CXX_EXECUTABLE_LINKER__compositeILM_Debug CMakeFiles/compositeILM.dir/main.cpp.o CMakeFiles/compositeILM.dir/ILM.cpp.o CMakeFiles/compositeILM.dir/MCMC.cpp.o CMakeFiles/compositeILM.dir/generate_individuals.cpp.o CMakeFiles/compositeILM.dir/simulate.cpp.o CMakeFiles/compositeILM.dir/Inference.cpp.o CMakeFiles/compositeILM.dir/Clustering.cpp.o CMakeFiles/compositeILM.dir/HamiltonianMC.cpp.o CMakeFiles/compositeILM.dir/Inference_composite.cpp.o CMakeFiles/compositeILM.dir/MCMC_composite.cpp.o | /usr/local/lib/libarmadillo.dylib /usr/local/lib/libcppad_lib.dylib
+build compositeILM: CXX_EXECUTABLE_LINKER__compositeILM_Debug CMakeFiles/compositeILM.dir/main.cpp.o CMakeFiles/compositeILM.dir/ILM.cpp.o CMakeFiles/compositeILM.dir/MCMC.cpp.o CMakeFiles/compositeILM.dir/generate_individuals.cpp.o CMakeFiles/compositeILM.dir/simulate.cpp.o CMakeFiles/compositeILM.dir/Inference.cpp.o CMakeFiles/compositeILM.dir/Clustering.cpp.o CMakeFiles/compositeILM.dir/HamiltonianMC.cpp.o CMakeFiles/compositeILM.dir/Inference_composite.cpp.o CMakeFiles/compositeILM.dir/MCMC_composite.cpp.o CMakeFiles/compositeILM.dir/posterior_predictive_checks.cpp.o CMakeFiles/compositeILM.dir/posterior_predictive_checks_composite.cpp.o CMakeFiles/compositeILM.dir/BBVI.cpp.o | /usr/local/lib/libarmadillo.dylib /usr/local/lib/libcppad_lib.dylib
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk
   LINK_LIBRARIES = /usr/local/lib/libarmadillo.dylib  /usr/local/lib/libcppad_lib.dylib
   OBJECT_DIR = CMakeFiles/compositeILM.dir

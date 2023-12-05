@@ -8,21 +8,26 @@ using namespace std;
  * double n1 = 0.5;
  */
 int t_rem = 3;//infection period is 3 days
-int total_pop = 100;//100 people
+int total_pop = 50;//600 people
 int K = 3; //number of clusters
-int inf_time_tab[100] = {0};//a table storing each individual's infection time
-int rem_time_tab[100] = {0};//a table storing each individual's removal time
-double samples[50000][5] = {0};
+double a0 = 0.05;
+double a1 = 0.05;
+double n1 = 1;
+double beta = 1.5;
+double eps = 0;
+int inf_time_tab[300] = {0};//a table storing each individual's infection time
+int rem_time_tab[300] = {0};//a table storing each individual's removal time
+double samples[20000][5] = {0};
 Individual::Individual(){
     cur_status = 0; //0: S; 1: I; 2:R
     next_status = 0;//cache previous day status
     inf_time = -1;// individual's infect time
     rem_time = -1;// individual's removal time
-    coef[0] = 0.01;//a0
-    coef[1] = 0.01;//a1
-    coef[2] = 1;//n1
-    coef[3] = 1;//beta
-    coef[4] = 0;//allow between-clusters communication
+    coef[0] = a0;//a0
+    coef[1] = a1;//a1
+    coef[2] = n1;//n1
+    coef[3] = beta;//beta
+    coef[4] = eps;//allow between-clusters communication
     cluster_id = 0;
 }
 void Individual::set_sus_cov(const double& susceptibility){//susceptibility: from low to high, between 0-1
@@ -37,7 +42,7 @@ void Individual::set_position(double x, double y){
     position_x = x;
     position_y = y;
 }
-double Individual::get_sus(double a0, double a1){//a public interface to get individual's susceptibility
+double Individual::get_sus(double a0, double a1) {//a public interface to get individual's susceptibility
     s = a0 + a1* sus_cov[1];
     return s;
 }

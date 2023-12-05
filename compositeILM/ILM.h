@@ -11,6 +11,11 @@ extern int t_rem;//infection period is 3 days
 extern int current_time;//current time
 extern int total_pop;//total population
 extern int K;
+extern double a0;
+extern double a1;
+extern double n1;
+extern double beta;
+extern double eps;
 extern int inf_time_tab[];//a table store individuals' infection time
 extern int rem_time_tab[];//a table store individuals' removal time
 extern double samples[][5];
